@@ -1,9 +1,8 @@
 const express = require('express');
 const MoviesServices = require('../services/movies');
-const bodyParser = require("body-parser");
 
 function moviesApi(app) {
-  app.use(bodyParser.json());
+
   const router = express.Router();
   app.use('/api/movies', router);
 
@@ -11,9 +10,10 @@ function moviesApi(app) {
 
   router.get('/', async function(req, res, next) {
     try {
+      
       const {tags} = req.query;
-
       const movies = await moviesServices.getMovies({tags});
+      
       res.status(200).json({
         data: movies,
         message: 'peliculas listadas'
